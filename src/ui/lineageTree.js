@@ -268,7 +268,7 @@ export function renderLineageTree(container, treeData) {
     .attr('y', -3)
     .attr('class', 'tree-node-name')
     .text(d => truncateText(d.data.name, 22))
-    .attr('fill', '#ececec')
+    .attr('fill', '#111111')
     .attr('font-size', '13px')
     .attr('font-weight', 600)
     .attr('dominant-baseline', 'auto');
@@ -279,7 +279,7 @@ export function renderLineageTree(container, treeData) {
     .attr('y', 11)
     .attr('class', 'tree-node-layer')
     .text(d => d.data.layerLabel || '')
-    .attr('fill', '#9999bb')
+    .attr('fill', '#5F6B6D')
     .attr('font-size', '10px')
     .attr('dominant-baseline', 'auto');
 
@@ -298,7 +298,7 @@ export function renderLineageTree(container, treeData) {
     .attr('x', NODE_WIDTH / 2 - 14)
     .attr('y', 4)
     .attr('text-anchor', 'middle')
-    .attr('fill', '#7a7a90')
+    .attr('fill', '#8C9296')
     .attr('font-size', '12px')
     .attr('class', 'tree-node-toggle')
     .text(d => d.children ? '\u25BC' : '\u25B6')
@@ -356,9 +356,9 @@ export function exportTreeAsSvg(container, filename = 'lineage-tree') {
   // Add background and inline styles for standalone rendering
   const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
   style.textContent = `
-    svg { background: #1a1a2e; }
-    .tree-node-name { fill: #ececec; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-    .tree-node-layer { fill: #9999bb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    svg { background: #F5F5F0; }
+    .tree-node-name { fill: #111111; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .tree-node-layer { fill: #5F6B6D; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
   `;
   clone.insertBefore(style, clone.firstChild);
 
@@ -368,7 +368,7 @@ export function exportTreeAsSvg(container, filename = 'lineage-tree') {
   watermark.setAttribute('x', vb[2] - 10);
   watermark.setAttribute('y', vb[3] - 8);
   watermark.setAttribute('text-anchor', 'end');
-  watermark.setAttribute('fill', '#555580');
+  watermark.setAttribute('fill', '#B0B4B8');
   watermark.setAttribute('font-size', '10');
   watermark.setAttribute('font-family', '-apple-system, BlinkMacSystemFont, sans-serif');
   watermark.textContent = 'PBIP Lineage Explorer — free & open-source by Jihwan Kim';
@@ -401,9 +401,9 @@ export function exportTreeAsPng(container, filename = 'lineage-tree') {
   // Add inline styles + background
   const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
   style.textContent = `
-    svg { background: #1a1a2e; }
-    .tree-node-name { fill: #ececec; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-    .tree-node-layer { fill: #9999bb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    svg { background: #F5F5F0; }
+    .tree-node-name { fill: #111111; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .tree-node-layer { fill: #5F6B6D; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
   `;
   clone.insertBefore(style, clone.firstChild);
 
@@ -412,7 +412,7 @@ export function exportTreeAsPng(container, filename = 'lineage-tree') {
   watermark.setAttribute('x', w - 10);
   watermark.setAttribute('y', h - 8);
   watermark.setAttribute('text-anchor', 'end');
-  watermark.setAttribute('fill', '#555580');
+  watermark.setAttribute('fill', '#B0B4B8');
   watermark.setAttribute('font-size', '10');
   watermark.setAttribute('font-family', '-apple-system, BlinkMacSystemFont, sans-serif');
   watermark.textContent = 'PBIP Lineage Explorer — free & open-source by Jihwan Kim';
@@ -430,8 +430,8 @@ export function exportTreeAsPng(container, filename = 'lineage-tree') {
     canvas.height = h * scale;
     const ctx = canvas.getContext('2d');
 
-    // Dark background
-    ctx.fillStyle = '#1a1a2e';
+    // Light background
+    ctx.fillStyle = '#F5F5F0';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, 0, 0);
 
@@ -455,7 +455,7 @@ function downloadBlob(blob, filename) {
 // --- Helpers ---
 
 function getLayerColor(type) {
-  return LAYER_COLORS[type] || '#607d8b';
+  return LAYER_COLORS[type] || '#5F6B6D';
 }
 
 function truncateExpr(expr) {
@@ -493,8 +493,8 @@ function addLegend(svg, width) {
     .attr('width', 168)
     .attr('height', legendData.length * 20 + 16)
     .attr('rx', 6)
-    .attr('fill', 'rgba(22, 33, 62, 0.92)')
-    .attr('stroke', '#2a2a4a');
+    .attr('fill', 'rgba(255, 255, 255, 0.95)')
+    .attr('stroke', '#D8DADC');
 
   const entries = legend.selectAll('.legend-entry')
     .data(legendData)
@@ -512,6 +512,6 @@ function addLegend(svg, width) {
     .attr('x', 16)
     .attr('y', 10)
     .text(d => `L${d.layer}: ${d.label}`)
-    .attr('fill', '#b0b0c0')
+    .attr('fill', '#5F6B6D')
     .attr('font-size', '11px');
 }

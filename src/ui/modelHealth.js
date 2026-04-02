@@ -104,7 +104,7 @@ function renderDashboard(container, graph) {
       const node = graph.nodes.get(id);
       if (!node) continue;
       html += `<div class="health-orphan-item" data-measure-id="${esc(id)}">`;
-      html += `<span class="health-dot" style="background:#ff9800"></span>`;
+      html += `<span class="health-dot" style="background:#D47600"></span>`;
       html += `<span class="health-orphan-name">${esc(node.name)}</span>`;
       html += `<span class="health-orphan-table">${esc(node.metadata?.table || '')}</span>`;
       html += '</div>';

@@ -1004,7 +1004,7 @@ function showError(message) {
   if (el) {
     const prev = el.textContent;
     el.textContent = message;
-    el.style.color = '#ff5252';
+    el.style.color = '#DA3D2A';
     setTimeout(() => { el.textContent = prev; el.style.color = ''; }, 5000);
   }
 }

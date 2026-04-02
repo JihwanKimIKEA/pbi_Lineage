@@ -9,13 +9,13 @@ export const NODE_TYPES = {
 };
 
 export const NODE_COLORS = {
-  table: '#4285f4',
-  column: '#9c27b0',
-  measure: '#ff9800',
-  visual: '#4caf50',
-  page: '#00bcd4',
-  source: '#757575',
-  expression: '#795548',
+  table: '#005A9B',
+  column: '#7B1FA2',
+  measure: '#D47600',
+  visual: '#2E7D32',
+  page: '#00838F',
+  source: '#5F6B6D',
+  expression: '#5D4037',
 };
 
 export const NODE_LABELS = {
@@ -29,20 +29,20 @@ export const NODE_LABELS = {
 };
 
 export const EDGE_COLORS = {
-  visual_to_field: '#4caf50',
-  visual_to_page: '#00bcd4',
-  measure_to_measure: '#ff9800',
-  measure_to_column: '#ce93d8',
-  measure_to_userelationship: '#ff5722',
-  column_to_table: '#64b5f6',
-  calc_column_to_column: '#ba68c8',
-  calc_column_to_measure: '#ffb74d',
-  table_relationship: '#546e7a',
-  table_to_source: '#90a4ae',
-  table_to_expression: '#8d6e63',
-  expression_to_source: '#a1887f',
-  field_param_to_field: '#e91e63',
-  column_to_source_column: '#78909c',
+  visual_to_field: '#2E7D32',
+  visual_to_page: '#00838F',
+  measure_to_measure: '#D47600',
+  measure_to_column: '#7B1FA2',
+  measure_to_userelationship: '#DA3D2A',
+  column_to_table: '#005A9B',
+  calc_column_to_column: '#8E24AA',
+  calc_column_to_measure: '#E09400',
+  table_relationship: '#546E7A',
+  table_to_source: '#78909C',
+  table_to_expression: '#5D4037',
+  expression_to_source: '#795548',
+  field_param_to_field: '#C2185B',
+  column_to_source_column: '#607D8B',
 };
 
 export const EDGE_TYPES = {
@@ -69,12 +69,12 @@ export const ENRICHMENT_TYPES = {
 
 /** Colors for the 6-layer lineage tree visualization */
 export const LAYER_COLORS = {
-  visual: '#4caf50',
-  measure: '#ff9800',
-  subMeasure: '#ffb74d',
-  column: '#9c27b0',
-  expression: '#795548',
-  source: '#607d8b',
+  visual: '#2E7D32',
+  measure: '#D47600',
+  subMeasure: '#E09400',
+  column: '#7B1FA2',
+  expression: '#5D4037',
+  source: '#5F6B6D',
 };
 
 /** Labels for the 6 lineage layers */

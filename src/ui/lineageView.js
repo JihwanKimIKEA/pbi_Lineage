@@ -172,7 +172,7 @@ export function renderVisualLineage(visualLineage, graph) {
     if (calculationGroups.length > 0) {
       for (const cg of calculationGroups) {
         html += '<div class="lineage-section">';
-        html += `<h3>Calculation Group — ${esc(cg.tableName)} <span class="visual-type-badge" style="background:rgba(0,188,212,0.2);color:#00bcd4">CG</span></h3>`;
+        html += `<h3>Calculation Group — ${esc(cg.tableName)} <span class="visual-type-badge" style="background:rgba(0,131,143,0.1);color:#00838F">CG</span></h3>`;
         html += `<p class="lineage-muted" style="margin-bottom:8px">This visual's measures are modified by ${cg.items.length} calculation item${cg.items.length !== 1 ? 's' : ''}. Each item applies a transformation (e.g., YTD, QTD, MTD) to the selected measure.</p>`;
         if (cg.items.length > 0) {
           html += '<div class="trace-table-wrapper"><table class="trace-table cg-items-table">';
@@ -193,7 +193,7 @@ export function renderVisualLineage(visualLineage, graph) {
     // Field parameter indicator (if FP measures found)
     if (fieldParameterMeasures && fieldParameterMeasures.length > 0) {
       html += '<div class="lineage-section">';
-      html += '<h3>Field Parameter — Available Measures <span class="visual-type-badge" style="background:rgba(233,30,99,0.2);color:#e91e63">FP</span></h3>';
+      html += '<h3>Field Parameter — Available Measures <span class="visual-type-badge" style="background:rgba(218,61,42,0.1);color:#DA3D2A">FP</span></h3>';
       html += `<p class="lineage-muted" style="margin-bottom:8px">This visual uses a field parameter. All ${fieldParameterMeasures.length} available measures are shown below with full lineage.</p>`;
       html += '</div>';
     }
@@ -220,8 +220,8 @@ export function renderVisualLineage(visualLineage, graph) {
         html += `<span class="chain-dot" style="background:${NODE_COLORS.measure};display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;"></span>`;
         html += `[${esc(m.measureName)}]`;
         if (m.fpDisplayName && m.fpDisplayName !== m.measureName) html += ` <span class="fp-display-label">displayed as</span> <span class="fp-display-name">${esc(m.fpDisplayName)}</span>`;
-        if (isFp && !isDirect) html += ` <span class="visual-type-badge" style="background:rgba(255,152,0,0.2);color:#ff9800;margin-left:6px">FP</span>`;
-        if (isDirect) html += ` <span class="visual-type-badge" style="background:rgba(76,175,80,0.2);color:#4caf50;margin-left:6px">active</span>`;
+        if (isFp && !isDirect) html += ` <span class="visual-type-badge" style="background:rgba(212,118,0,0.1);color:#D47600;margin-left:6px">FP</span>`;
+        if (isDirect) html += ` <span class="visual-type-badge" style="background:rgba(46,125,50,0.1);color:#2E7D32;margin-left:6px">active</span>`;
         html += `</summary>`;
         html += `<div class="measure-accordion-body">`;
         if (m.lineage) {
@@ -284,7 +284,7 @@ function renderVisualsSection(visuals) {
     html += `<td class="lineage-mono">${esc(v.id.split('/').pop() || v.id)}</td>`;
     html += `<td${displayDiffers ? ' class="renamed-cell"' : ''}>${esc(v.metricDisplayName)}</td>`;
     html += `<td>${esc(v.metricDaxName)}</td>`;
-    html += `<td>${v.bindingType === 'fieldParameter' ? '<span class="visual-type-badge" style="background:rgba(233,30,99,0.2);color:#e91e63">FP</span>' : ''}</td>`;
+    html += `<td>${v.bindingType === 'fieldParameter' ? '<span class="visual-type-badge" style="background:rgba(218,61,42,0.1);color:#DA3D2A">FP</span>' : ''}</td>`;
     html += `</tr>`;
   });
   html += '</tbody></table></div>';
@@ -367,7 +367,7 @@ function renderChainNode(chain, depth) {
       if (relPairs.length > 0) {
         for (const pair of relPairs) {
           html += `<div class="chain-rel-item">`;
-          html += `<span class="chain-dot" style="background:#ff5722"></span>`;
+          html += `<span class="chain-dot" style="background:#DA3D2A"></span>`;
           html += `${esc(pair.from.table)}[${esc(pair.from.column)}]`;
           if (pair.to) html += ` &#8596; ${esc(pair.to.table)}[${esc(pair.to.column)}]`;
           const cf = chain.useRelationships.crossFilter;
@@ -378,7 +378,7 @@ function renderChainNode(chain, depth) {
         // Show individual columns involved
         for (const ur of chain.useRelationships) {
           html += `<div class="chain-rel-item">`;
-          html += `<span class="chain-dot" style="background:#ff5722"></span>`;
+          html += `<span class="chain-dot" style="background:#DA3D2A"></span>`;
           html += `${esc(ur.table)}[${esc(ur.column)}]`;
           html += `</div>`;
         }
@@ -486,7 +486,7 @@ function renderVisualSummarySection(visual, measureChain, sourceTable) {
   html += '<div class="summary-tree-html">';
   html += `<div class="summary-node layer-visual">`;
   html += `<span class="layer-label">L1</span>`;
-  html += `<span class="summary-dot" style="background:#4caf50"></span>`;
+  html += `<span class="summary-dot" style="background:#2E7D32"></span>`;
   html += `<span class="summary-node-name">${esc(visualHeader)}</span>`;
   html += `</div>`;
   if (measureChain) {
@@ -540,7 +540,7 @@ function renderStructuredSummaryTree(treeString, measureChain, colSourceMap) {
   // L1: Visual node
   html += `<div class="summary-node layer-visual">`;
   html += `<span class="layer-label">L1</span>`;
-  html += `<span class="summary-dot" style="background:#4caf50"></span>`;
+  html += `<span class="summary-dot" style="background:#2E7D32"></span>`;
   html += `<span class="summary-node-name">${esc(visualHeader)}</span>`;
   html += `</div>`;
   if (metricDisplay) {
@@ -563,7 +563,7 @@ function renderSummaryChainNode(chain, depth, colSourceMap) {
 
   let html = `<div class="summary-node ${isSub ? 'layer-submeasure' : 'layer-measure'}" style="margin-left:${indent}px">`;
   html += `<span class="layer-label">${isSub ? 'L3' : 'L2'}</span>`;
-  html += `<span class="summary-dot" style="background:${isSub ? '#ffb74d' : '#ff9800'}"></span>`;
+  html += `<span class="summary-dot" style="background:${isSub ? '#E09400' : '#D47600'}"></span>`;
   html += `<span class="summary-node-name clickable" data-id="${esc(chain.id)}">[${esc(chain.name)}]</span>`;
   if (chain.table) html += ` <span class="chain-table">(${esc(chain.table)})</span>`;
   html += `</div>`;
@@ -576,7 +576,7 @@ function renderSummaryChainNode(chain, depth, colSourceMap) {
 
     html += `<div class="summary-node layer-column${col.wasRenamed ? ' renamed-node' : ''}" style="margin-left:${colIndent}px">`;
     html += `<span class="layer-label">L4</span>`;
-    html += `<span class="summary-dot" style="background:#9c27b0"></span>`;
+    html += `<span class="summary-dot" style="background:#7B1FA2"></span>`;
     html += `<span class="summary-node-name">${esc(col.table)}[${esc(col.name)}]</span>`;
     if (col.wasRenamed) html += ` <span class="renamed-badge">renamed</span>`;
     html += `</div>`;
@@ -584,7 +584,7 @@ function renderSummaryChainNode(chain, depth, colSourceMap) {
     if (source?.sourceTable) {
       html += `<div class="summary-node layer-source" style="margin-left:${colIndent + 20}px">`;
       html += `<span class="layer-label">L6</span>`;
-      html += `<span class="summary-dot" style="background:#607d8b"></span>`;
+      html += `<span class="summary-dot" style="background:#5F6B6D"></span>`;
       html += `<span class="summary-node-name">${esc(source.sourceTable)}.${esc(source.sourceColumnFull)}</span>`;
       html += `</div>`;
     }
@@ -1090,7 +1090,7 @@ function bindClickHandlers(container) {
         navigator.clipboard.writeText(dax).then(() => {
           const orig = btn.innerHTML;
           btn.innerHTML = '&#10003;';
-          btn.style.color = '#4caf50';
+          btn.style.color = '#2E7D32';
           setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 1500);
         }).catch(() => {});
       }
@@ -1118,7 +1118,7 @@ function bindClickHandlers(container) {
         navigator.clipboard.writeText(decoded + footer).then(() => {
           const orig = btn.textContent;
           btn.textContent = 'Copied!';
-          btn.style.color = '#4caf50';
+          btn.style.color = '#2E7D32';
           setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500);
         }).catch(() => {});
       }
@@ -1237,8 +1237,8 @@ function buildChainMarkdown(chain, depth, lines) {
 function showExportFeedback(btn) {
   const orig = btn.textContent;
   btn.textContent = 'Exported!';
-  btn.style.color = '#4caf50';
-  btn.style.borderColor = '#4caf50';
+  btn.style.color = '#2E7D32';
+  btn.style.borderColor = '#2E7D32';
   setTimeout(() => { btn.textContent = orig; btn.style.color = ''; btn.style.borderColor = ''; }, 1500);
 }
 

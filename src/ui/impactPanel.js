@@ -7,13 +7,13 @@ import { analyzeImpact, exportImpactReport } from '@pbip-lineage/core';
 
 // Node type colors (matching CSS variables)
 const NODE_COLORS = {
-  table: '#4285f4',
-  column: '#9c27b0',
-  measure: '#ff9800',
-  visual: '#4caf50',
-  page: '#00bcd4',
-  source: '#757575',
-  expression: '#607d8b',
+  table: '#005A9B',
+  column: '#7B1FA2',
+  measure: '#D47600',
+  visual: '#2E7D32',
+  page: '#00838F',
+  source: '#5F6B6D',
+  expression: '#5F6B6D',
 };
 
 let currentNodeId = null;
@@ -154,7 +154,7 @@ function renderCurrentImpact() {
     html += `</div>`;
     html += `<div class="impact-group-items">`;
     for (const node of items) {
-      const color = NODE_COLORS[node.type] || '#888';
+      const color = NODE_COLORS[node.type] || '#8C9296';
       const escapedName = escapeHtml(node.name);
       const navigable = node.type === 'measure' || node.type === 'visual';
       html += `<div class="impact-item${navigable ? ' impact-item-navigable' : ''}" data-id="${escapeHtml(node.id)}" data-type="${node.type}">`;
