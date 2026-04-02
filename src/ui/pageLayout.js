@@ -39,16 +39,11 @@ export function renderPageLayout(pageNode, graph) {
   const pageH = pageNode.metadata.height || 720;
   const pageId = pageNode.metadata.pageId;
 
-  // Set title
+  // Set title (subtitle deferred until effective canvas bounds are computed)
   if (titleEl) {
     titleEl.textContent = pageNode.name;
-    // Remove any existing subtitle and add page dimensions subtitle
     const oldSub = titleEl.nextElementSibling;
     if (oldSub && oldSub.classList.contains('lineage-subtitle')) oldSub.remove();
-    const sub = document.createElement('div');
-    sub.className = 'lineage-subtitle';
-    sub.textContent = `${pageW} \u00d7 ${pageH}`;
-    titleEl.insertAdjacentElement('afterend', sub);
   }
 
   // Gather visuals on this page
@@ -150,17 +145,37 @@ export function renderPageLayout(pageNode, graph) {
   // Sort positioned visuals by z-order for proper stacking
   positioned.sort((a, b) => (a.position.z || 0) - (b.position.z || 0));
 
+  // Compute effective canvas bounds from actual visual positions
+  let effectiveW = pageW;
+  let effectiveH = pageH;
+  for (const v of positioned) {
+    const p = v.position;
+    if (p.x != null && p.width != null) effectiveW = Math.max(effectiveW, p.x + p.width);
+    if (p.y != null && p.height != null) effectiveH = Math.max(effectiveH, p.y + p.height);
+  }
+
+  // Add subtitle with page dimensions (now that effective bounds are known)
+  if (titleEl) {
+    const sub = document.createElement('div');
+    sub.className = 'lineage-subtitle';
+    if (effectiveW !== pageW || effectiveH !== pageH) {
+      sub.textContent = `${pageW} \u00d7 ${pageH}  (content: ${Math.round(effectiveW)} \u00d7 ${Math.round(effectiveH)})`;
+    } else {
+      sub.textContent = `${pageW} \u00d7 ${pageH}`;
+    }
+    titleEl.insertAdjacentElement('afterend', sub);
+  }
+
   // Render canvas into #lineage-tree-container
   if (treeContainer) {
-    const paddingPct = (pageH / pageW * 100).toFixed(4);
-    let canvasHtml = `<div class="page-layout-canvas" style="padding-bottom: ${paddingPct}%">`;
+    let canvasHtml = `<div class="page-layout-canvas" style="aspect-ratio: ${effectiveW} / ${effectiveH}">`;
 
     for (const v of positioned) {
       const p = v.position;
-      const left = (p.x / pageW * 100).toFixed(3);
-      const top = (p.y / pageH * 100).toFixed(3);
-      const width = (p.width / pageW * 100).toFixed(3);
-      const height = (p.height / pageH * 100).toFixed(3);
+      const left = (p.x / effectiveW * 100).toFixed(3);
+      const top = (p.y / effectiveH * 100).toFixed(3);
+      const width = (p.width / effectiveW * 100).toFixed(3);
+      const height = (p.height / effectiveH * 100).toFixed(3);
       const zIndex = p.z != null ? Math.max(0, Math.floor(p.z / 100)) : 'auto';
       const cat = typeCategory(v.type);
       const label = v.title || shortType(v.type);

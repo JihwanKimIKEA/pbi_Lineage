@@ -1228,6 +1228,7 @@ mark {
   border-radius: 8px;
   overflow: hidden;
   box-sizing: border-box;
+  /* aspect-ratio set via inline style from pageLayout.js */
 }
 
 .page-layout-visual {
